@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { useEffect } from "react";
-import { checkAuth } from "./authslice";
+import { checkAuth } from "./authSlice";
 import {useDispatch,useSelector} from "react-redux";
 import AdminPanel from "./pages/AdminPanel";
 import ProblemPage from "./pages/ProblemPage";
