@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router';
-import { registerUser } from '../authslice';
+import { registerUser } from '../authSlice';
 import { Mail, Lock, User as UserIcon, Eye, EyeOff, BookOpen, ArrowRight } from 'lucide-react';
 
 const signupSchema = z.object({
