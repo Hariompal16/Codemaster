@@ -12,7 +12,7 @@ import {
   Play
 } from 'lucide-react';
 import { useDailyProblem } from '../hooks/useDailyProblem';
-import { logoutUser } from '../authslice';
+import { logoutUser } from '../authSlice';
 
 const DailyProblem = () => {
   const dispatch = useDispatch();
