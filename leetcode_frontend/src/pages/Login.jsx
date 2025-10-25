@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router';
-import { loginUser } from '../authslice';
+import { loginUser } from '../authSlice';
 import { useEffect, useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, BookOpen, ArrowRight } from 'lucide-react';
 
