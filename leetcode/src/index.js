@@ -14,7 +14,7 @@ const cors=require("cors")
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: https://leetcode-fronten.onrender.com,
     credentials: true 
 }))
 
