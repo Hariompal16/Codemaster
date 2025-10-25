@@ -24,7 +24,11 @@ const register=async (req,res)=>{
    }
     
     const token=jwt.sign({emailId:emailId,_id:user._id,role:user.role},process.env.JWT_SECRET,{expiresIn:60*60});
-    res.cookie('token',token,{maxAge:60*60*1000});
+    res.cookie('token',token,{
+        httpOnly: true,
+        secure: true,
+         sameSite: "None",
+       maxAge:60*60*1000});
     res.json({
   user:reply,
   message:"registered succesfully"
@@ -60,7 +64,11 @@ const login = async (req,res)=>{
         }
 
         const token =  jwt.sign({_id:user._id , emailId:emailId, role:user.role},process.env.JWT_SECRET,{expiresIn: 60*60});
-        res.cookie('token',token,{maxAge: 60*60*1000});
+        res.cookie('token',token,{
+            httpOnly: true,
+         secure: true,
+            sameSite: "None",
+           maxAge: 60*60*1000});
         res.status(201).json({
             user:reply,
             message:"Loggin Successfully"
@@ -79,7 +87,11 @@ const logout=async(req,res)=>{
     await redisClient.set(`token:${token}`,"blocked");
     await redisClient.expireAt(`token:${token}`,payload.exp);
 
-    res.cookie("token",null,{expires:new Date(Date.now())});
+    res.cookie("token",null,{
+        httpOnly: true,
+       secure: true,
+       sameSite: "None",
+       expires:new Date(Date.now())});
     res.send("logged out succesfully");
    }
    catch(err){
@@ -99,7 +111,11 @@ const adminregister=async (req,res)=>{
      const user= await User.create(req.body);
       
       const token=jwt.sign({emailId:emailId,_id:user._id,role:user.role},process.env.JWT_SECRET,{expiresIn:60*60});
-      res.cookie('token',token,{maxAge:60*60*1000});
+      res.cookie('token',token,{
+          httpOnly: true,
+       secure: true,
+         sameSite: "None",
+         maxAge:60*60*1000});
       res.send("user registered succesfully");
      }
      catch(err){
