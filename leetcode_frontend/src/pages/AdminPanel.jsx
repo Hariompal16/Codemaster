@@ -83,7 +83,6 @@ function AdminPanel() {
   const onSubmit = async (data) => {
     try {
       setloading(true)
-      console.log("fhhff")
       await axiosClient.post('/problem/create', data);
       alert('Problem created successfully!');
       navigate('/');
