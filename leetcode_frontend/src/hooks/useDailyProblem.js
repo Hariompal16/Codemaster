@@ -13,7 +13,7 @@ export const useDailyProblem = () => {
       setError(null);
       
       const response = await axiosClient.get('/problem/daily-problem');
-      console.log('Daily Problem Response:', response);
+      
       setDailyProblem(response.data);
     } catch (err) {
       console.error('Error fetching daily problem:', err);
@@ -25,10 +25,8 @@ export const useDailyProblem = () => {
 
   const fetchStreak = async () => {
     try {
-      console.log('🔄 Fetching streak...');
+     
       const response = await axiosClient.get('/problem/daily-streak');
-      console.log('✅ Streak Response:', response.data);
-      console.log('✅ Streak value:', response.data.currentStreak);
       setStreak(response.data);
     } catch (err) {
       console.error('❌ Error fetching streak:', err);
@@ -45,7 +43,7 @@ export const useDailyProblem = () => {
         problemId,
         status
       });
-      console.log('Mark Progress Response:', res);
+      
       // Refresh data after marking progress
       await Promise.all([fetchDailyProblem(), fetchStreak()]);
       
