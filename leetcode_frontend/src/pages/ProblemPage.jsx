@@ -83,7 +83,7 @@ const { dailyProblem, markProgress } = useDailyProblem();
     const fetchProblem = async () => {
       setLoading(true);
       try {
-        console.log(`Attempting to fetch problem with ID: ${problemId}`);
+       
         const response = await axiosClient.get(`/problem/problemfetch/${problemId}`);
         
 
