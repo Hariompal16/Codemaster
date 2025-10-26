@@ -54,23 +54,24 @@ function Signup() {
 
       {/* Foreground Card (interactive) */}
       <div className="relative z-50 w-full max-w-md pointer-events-auto">
-        <div className="relative bg-white/5 text-white rounded-2xl shadow-2xl p-8 space-y-6 overflow-hidden">
-          {/* Ensure visible content sits above any decoration */}
+        <div className="relative bg-[#0b0b0b] text-white rounded-2xl shadow-2xl p-8 space-y-6 border border-gray-800 overflow-hidden">
           <div className="relative z-20 space-y-6">
             {/* Header */}
             <div className="text-center mb-4">
               <div className="flex items-center justify-center mb-4">
-                <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
               </div>
               <h1 className="text-3xl font-bold text-white mb-1">Join CodeMaster</h1>
-              <p className="text-gray-300">Create your account and start your coding journey</p>
+              <p className="text-gray-400">
+                Create your account and start your coding journey
+              </p>
             </div>
 
             {/* Error */}
             {error && (
-              <div className="bg-red-900 text-red-200 border border-red-500 rounded-lg px-3 py-2 text-sm text-center">
+              <div className="bg-red-950 text-red-400 border border-red-700 rounded-lg px-3 py-2 text-sm text-center">
                 {error}
               </div>
             )}
@@ -79,72 +80,82 @@ function Signup() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* First Name */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-200">First Name</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  First Name
+                </label>
                 <div className="relative">
-                  <UserIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <UserIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
                   <input
                     type="text"
                     placeholder="Enter your first name"
-                    className={`w-full pl-11 pr-4 py-3 border rounded-xl transition-all duration-200 bg-transparent text-white placeholder-gray-400 ${
-                      errors.firstName ? "border-red-400 bg-red-900/20" : "border-gray-700 focus:border-purple-400"
+                    className={`w-full pl-11 pr-4 py-3 border rounded-xl transition-all duration-200 bg-[#141414] text-white placeholder-gray-500 ${
+                      errors.firstName
+                        ? "border-red-400 bg-red-900/20"
+                        : "border-gray-700 focus:border-purple-400"
                     }`}
                     {...register("firstName")}
                   />
                 </div>
                 {errors.firstName && (
-                  <p className="text-sm text-red-400 flex items-center gap-1">
-                    {errors.firstName.message}
-                  </p>
+                  <p className="text-sm text-red-400">{errors.firstName.message}</p>
                 )}
               </div>
 
               {/* Email */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-200">Email Address</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  Email Address
+                </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className={`w-full pl-11 pr-4 py-3 border rounded-xl transition-all duration-200 bg-transparent text-white placeholder-gray-400 ${
-                      errors.emailId ? "border-red-400 bg-red-900/20" : "border-gray-700 focus:border-purple-400"
+                    className={`w-full pl-11 pr-4 py-3 border rounded-xl transition-all duration-200 bg-[#141414] text-white placeholder-gray-500 ${
+                      errors.emailId
+                        ? "border-red-400 bg-red-900/20"
+                        : "border-gray-700 focus:border-purple-400"
                     }`}
                     {...register("emailId")}
                   />
                 </div>
                 {errors.emailId && (
-                  <p className="text-sm text-red-400 flex items-center gap-1">
-                    {errors.emailId.message}
-                  </p>
+                  <p className="text-sm text-red-400">{errors.emailId.message}</p>
                 )}
               </div>
 
               {/* Password */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-200">Password</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  Password
+                </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a strong password"
-                    className={`w-full pl-11 pr-12 py-3 border rounded-xl transition-all duration-200 bg-transparent text-white placeholder-gray-400 ${
-                      errors.password ? "border-red-400 bg-red-900/20" : "border-gray-700 focus:border-purple-400"
+                    className={`w-full pl-11 pr-12 py-3 border rounded-xl transition-all duration-200 bg-[#141414] text-white placeholder-gray-500 ${
+                      errors.password
+                        ? "border-red-400 bg-red-900/20"
+                        : "border-gray-700 focus:border-purple-400"
                     }`}
                     {...register("password")}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword((s) => !s)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
                     aria-label="Toggle password visibility"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-sm text-red-400 flex items-center gap-1">
-                    {errors.password.message}
-                  </p>
+                  <p className="text-sm text-red-400">{errors.password.message}</p>
                 )}
               </div>
 
@@ -153,14 +164,14 @@ function Signup() {
                 type="submit"
                 disabled={loading}
                 className={`w-full py-3 px-4 rounded-xl font-semibold text-white transition-all duration-300 transform ${
-                  loading ? "bg-gray-500 cursor-not-allowed" : "gradient-primary hover:shadow-lg active:scale-95"
+                  loading
+                    ? "bg-gray-600 cursor-not-allowed"
+                    : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-90 active:scale-95"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   {loading ? (
-                    <>
-                      <span>Creating Account...</span>
-                    </>
+                    <span>Creating Account...</span>
                   ) : (
                     <>
                       <span>Create Account</span>
@@ -173,20 +184,17 @@ function Signup() {
 
             {/* Footer */}
             <div className="text-center mt-2">
-              <p className="text-gray-300">
+              <p className="text-gray-400">
                 Already have an account?{" "}
                 <NavLink
                   to="/login"
-                  className="font-semibold text-purple-300 hover:text-purple-200 hover:underline relative z-50"
+                  className="font-semibold text-purple-400 hover:text-purple-300 hover:underline"
                 >
                   Sign In
                 </NavLink>
               </p>
             </div>
           </div>
-
-          {/* Any decorative accents inside the card (kept behind content) */}
-          <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-r from-purple-600/10 to-blue-400/8 rounded-full blur-2xl opacity-30 pointer-events-none z-10" />
         </div>
       </div>
     </div>
