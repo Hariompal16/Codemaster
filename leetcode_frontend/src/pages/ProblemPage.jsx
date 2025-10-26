@@ -200,10 +200,10 @@ const { dailyProblem, markProgress } = useDailyProblem();
       setsubmitResult(response.data);
       setLoading(false);
       setActiveRightTab('result');
-      console.log(dailyProblem.problem._id,response.data.accepted);
+     
        if (dailyProblem && dailyProblem.problem._id === problemId && response.data.accepted) {
         const result = await markProgress(problemId, 'solved');
-        console.log('Mark Progress Result:', result);
+     
         if (result.success) {
           showNotification('success', '🎉 Daily problem marked as solved! Your streak is growing!');
         } else {
