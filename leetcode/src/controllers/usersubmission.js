@@ -50,7 +50,6 @@ const submitCode=async(req,res)=>{
          let status='accepted';
          let errorMessage=null;
        for(const test of testresult){
-        console.log('Test result:', test); // Debug logging
         if(test.status_id === 3){ // Accepted
            testcasespassed++;
            runtime = runtime + parseFloat(test.time || 0);
@@ -93,10 +92,7 @@ const submitCode=async(req,res)=>{
         const todayUTC = new Date(Date.UTC(utcYear, utcMonth, utcDate, 0, 0, 0, 0));
         const tomorrowUTC = new Date(Date.UTC(utcYear, utcMonth, utcDate + 1, 0, 0, 0, 0));
 
-        console.log('🔍 DEBUG: Checking for today\'s daily problem');
-        console.log('🔍 DEBUG: Today (UTC):', todayUTC.toISOString());
-        console.log('🔍 DEBUG: Tomorrow (UTC):', tomorrowUTC.toISOString());
-        console.log('🔍 DEBUG: Problem ID being submitted:', problemId);
+    
 
         // Check if this problem is today's daily problem
         const dailyProblem = await DailyProblem.findOne({
@@ -104,15 +100,10 @@ const submitCode=async(req,res)=>{
           date: { $gte: todayUTC, $lt: tomorrowUTC }
         });
 
-        console.log('🔍 DEBUG: Daily problem found:', dailyProblem);
+       
 
         if (dailyProblem) {
-          // Mark the daily progress as solved
-          console.log('✅ Found today\'s daily problem! Marking user progress...');
-          console.log('✅ Creating/updating UserDailyProgress record...');
-          console.log('✅ userId:', userId);
-          console.log('✅ problemId:', problemId);
-          console.log('✅ date:', todayUTC);
+          
           
           try {
             // First try to find existing record
@@ -123,12 +114,12 @@ const submitCode=async(req,res)=>{
             });
 
             if (progressRecord) {
-              console.log('✅ Found existing record, updating status to solved');
+             
               progressRecord.status = 'solved';
               await progressRecord.save();
-              console.log('✅ Record updated:', progressRecord);
+          
             } else {
-              console.log('✅ No existing record found, creating new one');
+              
               // Create new record
               const newRecord = new UserDailyProgress({
                 userId,
@@ -138,12 +129,11 @@ const submitCode=async(req,res)=>{
               });
               
               const savedRecord = await newRecord.save();
-              console.log('✅ New UserDailyProgress record created:', savedRecord);
+           
               progressRecord = savedRecord;
             }
             
-            console.log('✅ UserDailyProgress record successfully processed');
-            console.log('✅ User streak should update now');
+           
           } catch (createError) {
             console.error('❌ Error creating UserDailyProgress record:', createError);
             throw createError;
