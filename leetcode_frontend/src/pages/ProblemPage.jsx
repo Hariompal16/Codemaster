@@ -86,10 +86,6 @@ const { dailyProblem, markProgress } = useDailyProblem();
         console.log(`Attempting to fetch problem with ID: ${problemId}`);
         const response = await axiosClient.get(`/problem/problemfetch/${problemId}`);
         
-        // Debug: log the response to understand the structure
-        console.log('✅ Problem API response received:', response.data);
-        console.log('📝 Start code data:', response.data.startcode);
-        console.log('📋 Visible test cases:', response.data.visibletestcases);
 
         // Validate that we have the required data
         if (!response.data) {
@@ -101,14 +97,14 @@ const { dailyProblem, markProgress } = useDailyProblem();
             (sc) => sc.language === langMap[selectedLanguage]
           )?.initialcode || '';
 
-        console.log(`🔧 Initial code for ${selectedLanguage}:`, initialCode);
+       
 
         setProblem(response.data);
         setCode(initialCode);
         setLoading(false);
       } catch (err) {
         console.error('❌ Error fetching problem:', err);
-        console.log('🔄 Using fallback data instead...');
+        
         
         // Use fallback data instead of showing error
         const initialCode =
@@ -116,7 +112,7 @@ const { dailyProblem, markProgress } = useDailyProblem();
             (sc) => sc.language === langMap[selectedLanguage]
           )?.initialcode || '// Start coding here...';
 
-        console.log(`🔧 Fallback initial code for ${selectedLanguage}:`, initialCode);
+      
         
         setProblem(fallbackProblem);
         setCode(initialCode);
@@ -144,7 +140,7 @@ const { dailyProblem, markProgress } = useDailyProblem();
           (sc) => sc.language === langMap[selectedLanguage]
         )?.initialcode || `// ${selectedLanguage} code template not available\n// Start coding here...`;
       
-      console.log(`🔧 Language changed to ${selectedLanguage}, new code:`, initialCode);
+    
       setCode(initialCode);
     }
   }, [selectedLanguage, problem]);
