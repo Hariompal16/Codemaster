@@ -36,17 +36,17 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4 relative">
+      {/* 🔧 Background Pattern - z-index 0 and pointer-events disabled */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-4000"></div>
       </div>
 
-      <div className="relative w-full max-w-md">
-        {/* Main Card */}
-        <div className="card-enhanced bg-white/90 backdrop-blur-sm p-8 shadow-2xl border border-white/20">
+      {/* 🔧 Foreground (Signup Card) - z-index 10 to make clickable */}
+      <div className="relative w-full max-w-md z-10">
+        <div className="card-enhanced bg-white/90 backdrop-blur-sm p-8 shadow-2xl border border-white/20 rounded-2xl">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
@@ -189,12 +189,12 @@ function Signup() {
           </form>
 
           {/* Footer */}
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 relative z-20">
             <p className="text-gray-600">
               Already have an account?{' '}
               <NavLink 
                 to="/login" 
-                className="font-semibold text-purple-600 hover:text-purple-700 transition-colors hover:underline"
+                className="font-semibold text-purple-600 hover:text-purple-700 transition-colors hover:underline relative z-30"
               >
                 Sign In
               </NavLink>
@@ -202,7 +202,7 @@ function Signup() {
           </div>
         </div>
 
-        {/* Additional decorative elements */}
+        {/* Decorative elements */}
         <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-r from-purple-200 to-blue-200 rounded-full opacity-20 blur-xl"></div>
         <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-r from-indigo-200 to-purple-200 rounded-full opacity-20 blur-xl"></div>
       </div>
