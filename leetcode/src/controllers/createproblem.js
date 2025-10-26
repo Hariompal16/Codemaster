@@ -278,10 +278,10 @@ const dailyproblem = async (req, res) => {
 
 const markDailyProblemProgress = async (req, res) => {
   try {
-    console.log('📝 markDailyProblemProgress called');
+    
     const { problemId, status } = req.body;
     const userId = req.result._id;
-    console.log('📝 User ID:', userId, 'Problem ID:', problemId, 'Status:', status);
+    
 
     // Validate status
     if (!['solved', 'unsolved'].includes(status)) {
@@ -301,7 +301,7 @@ const markDailyProblemProgress = async (req, res) => {
       problemId,
       date: { $gte: today, $lt: tomorrow }
     });
-    console.log('📝 Daily Problem Found:', dailyProblem);
+   
     if (!dailyProblem) {
       return res.status(400).json({ message: 'This is not today\'s daily problem' });
     }
@@ -321,13 +321,13 @@ const markDailyProblemProgress = async (req, res) => {
       },
       { upsert: true, new: true }
     );
-    console.log('📝 Progress saved:', updatedProgress);
+   
 
     // Recalculate streak after marking progress
     const progress = await UserDailyProgress.find({ userId, status: 'solved' })
       .sort({ date: -1 });
 
-    console.log('📝 Total solved records:', progress.length);
+    
 
     let currentStreak = 0;
     let checkDate = new Date(today);
@@ -344,7 +344,7 @@ const markDailyProblemProgress = async (req, res) => {
       }
     }
 
-    console.log('📝 Current streak calculated:', currentStreak);
+   
     res.json({
       message: 'Daily problem progress updated',
       currentStreak,
@@ -364,9 +364,9 @@ const markDailyProblemProgress = async (req, res) => {
 
 const getDailyStreak = async (req, res) => {
   try {
-    console.log('\n🔥🔥🔥 getDailyStreak called');
+   
     const userId = req.result._id;
-    console.log('📊 User ID:', userId);
+
     
     // Get today's date in UTC at midnight
     const nowUTC = new Date();
@@ -374,7 +374,7 @@ const getDailyStreak = async (req, res) => {
     const utcMonth = nowUTC.getUTCMonth();
     const utcDate = nowUTC.getUTCDate();
     const today = new Date(Date.UTC(utcYear, utcMonth, utcDate, 0, 0, 0, 0));
-    console.log('📊 Today (UTC at midnight):', today.toISOString());
+  
     
     // Get user's daily progress sorted by date descending
     const progress = await UserDailyProgress.find({
@@ -382,10 +382,8 @@ const getDailyStreak = async (req, res) => {
       status: 'solved'
     }).sort({ date: -1 }).limit(365); // Check last 365 days max
     
-    console.log('📊 ✅ Found total records:', progress.length);
-    progress.forEach((p, idx) => {
-      console.log(`📊 Record ${idx + 1}: date=${p.date.toISOString()}, problemId=${p.problemId}`);
-    });
+   
+  ;
     
     if (progress.length === 0) {
       console.log('⚠️  No solved problems found!');
@@ -398,8 +396,7 @@ const getDailyStreak = async (req, res) => {
     let currentStreak = 0;
     let checkDate = new Date(today);
     
-    console.log('\n🔍 Starting streak calculation...');
-    console.log(`🔍 First checkDate: ${checkDate.toISOString()}`);
+ 
     
     // Calculate current streak
     for (let i = 0; i < progress.length; i++) {
@@ -407,13 +404,12 @@ const getDailyStreak = async (req, res) => {
       const recordDate = new Date(record.date);
       recordDate.setUTCHours(0, 0, 0, 0);
       
-      console.log(`\n🔍 [${i}] Comparing: recordDate=${recordDate.toISOString()} vs checkDate=${checkDate.toISOString()}`);
-      console.log(`🔍 [${i}] recordDate.getTime()=${recordDate.getTime()}, checkDate.getTime()=${checkDate.getTime()}`);
+  
       
       if (recordDate.getTime() === checkDate.getTime()) {
         currentStreak++;
         checkDate.setUTCDate(checkDate.getUTCDate() - 1);
-        console.log(`✅ [${i}] MATCH! Streak incremented to: ${currentStreak}, next checkDate: ${checkDate.toISOString()}`);
+       
       } else if (recordDate.getTime() < checkDate.getTime()) {
         console.log(`❌ [${i}] GAP FOUND! Record is older than expected. Breaking streak.`);
         break;
@@ -422,8 +418,7 @@ const getDailyStreak = async (req, res) => {
       }
     }
     
-    console.log(`\n🔥 Final streak calculation: ${currentStreak}`);
-    console.log(`🔥 Total solved: ${progress.length}\n`);
+  
     
     res.json({
       currentStreak,
