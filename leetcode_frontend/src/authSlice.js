@@ -37,9 +37,7 @@ export const checkAuth = createAsyncThunk(
       return data.user;
     } catch (error) {
       // Silently handle 401 errors (user not authenticated)
-      if (error.response?.status === 401) {
-        return rejectWithValue({ message: 'Not authenticated', status: 401 });
-      }
+      
       // Log other errors for debugging
       console.error('Auth check failed:', error.message);
       return rejectWithValue(error);
