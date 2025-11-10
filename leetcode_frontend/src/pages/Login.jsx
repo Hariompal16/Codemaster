@@ -10,7 +10,7 @@ import { Mail, Lock, Eye, EyeOff, BookOpen, ArrowRight } from 'lucide-react';
 
 const loginSchema = z.object({
   emailId: z.string().email("Invalid Email"),
-  password: z.string().min(8, "Password is too weak") 
+  password: z.string().min(8, "Password is incorrect") 
 });
 
 function Login() {
