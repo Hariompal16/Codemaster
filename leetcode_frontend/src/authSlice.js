@@ -10,7 +10,7 @@ export const registerUser = createAsyncThunk(
     } catch (error) {
      return rejectWithValue({
         status: error.response?.status,
-        message: error.response?.data?.message || error.message,
+        message: error.response?.data?.message || "registration failed use special characters and capital letters in password",
       });
     }
   }
