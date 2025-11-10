@@ -98,7 +98,7 @@ const authslice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message || 'Something went wrong';
+        state.error =  "Invalid email or password";
         state.isAuthenticated = false;
         state.user = null;
       })
