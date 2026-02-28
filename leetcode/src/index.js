@@ -24,7 +24,7 @@ app.use('/submit',submitrouter);
 app.use('/video',videoRouter)
 
 const intializeconnect=async()=>{
-     await Promise.all([main(),redisClient()]);
+     await Promise.all([main(),redisClient]);
      console.log("connected to DB");
      app.listen(process.env.PORT,()=>{
                 console.log("listening at port :"+process.env.PORT);
