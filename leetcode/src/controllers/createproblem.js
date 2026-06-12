@@ -7,10 +7,11 @@ const {getlanguagebyid,submitBatch,submittoken}=require('../utils/problemutitlit
 const DailyProblem = require('../models/dailyproblem');
 const UserDailyProgress = require('../models/userdailyPrgress');
 const problemCreate=async(req,res)=>{
-    await redisClient.del("allproblems");
+   
     const {title,description,difficulty,tags,visibletestcases,hiddentestcases,startcode,refrencesol,problemCreator}=req.body;
  
   try{
+       await redisClient.del("allproblems");
     for(const {language,completecode} of refrencesol){
         const languageid=getlanguagebyid(language);
        
