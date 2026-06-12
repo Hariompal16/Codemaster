@@ -155,21 +155,35 @@ const problemFetch=async(req,res)=>{
     res.status(500).send("Error: "+err);
   }
 }
-const getAllProblem=async(req,res)=>{
-  try{
-       const cached= await redisClient.get("allproblems");
-       if(cached){
-        return res.send(JSON.parse(cached));
-       }
-     const problems= await Problem.find({}).select('_id title tags  difficulty');
-     if(problems.length==0){
-      return res.send("problem is missing");
-     }
-  await redisClient.set("allproblems",JSON.stringify(problems));
-     res.send(problems);
-  }
-  catch(err){
-    res.send("error"+err);
+const getAllProblem = async (req, res) => {
+  try {
+
+    const cached = await redisClient.get("allproblems");
+
+    if (cached) {
+      return res.json(JSON.parse(cached));
+    }
+
+    const problems = await Problem.find({})
+      .select('_id title tags difficulty');
+
+    if (problems.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    await redisClient.set(
+      "allproblems",
+      JSON.stringify(problems)
+     );
+
+    return res.json(problems);
+
+  } catch (err) {
+
+    return res.status(500).json({
+      error: err.message
+    });
+
   }
 }
 
