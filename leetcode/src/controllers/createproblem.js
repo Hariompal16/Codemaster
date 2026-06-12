@@ -7,7 +7,7 @@ const {getlanguagebyid,submitBatch,submittoken}=require('../utils/problemutitlit
 const DailyProblem = require('../models/dailyproblem');
 const UserDailyProgress = require('../models/userdailyPrgress');
 const problemCreate=async(req,res)=>{
-      
+    await redisClient.del("allproblems");
     const {title,description,difficulty,tags,visibletestcases,hiddentestcases,startcode,refrencesol,problemCreator}=req.body;
  
   try{
@@ -156,11 +156,15 @@ const problemFetch=async(req,res)=>{
 }
 const getAllProblem=async(req,res)=>{
   try{
+       const cached= await redisClient.get("allproblems");
+       if(cached){
+        return res.send(JSON.parse(cached));
+       }
      const problems= await Problem.find({}).select('_id title tags  difficulty');
-     if(problems.lenght==0){
+     if(problems.length==0){
       return res.send("problem is missing");
      }
-
+  await redisClient.set("allproblems",JSON.stringify(problems));
      res.send(problems);
   }
   catch(err){
