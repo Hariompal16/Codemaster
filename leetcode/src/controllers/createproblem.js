@@ -161,7 +161,7 @@ const getAllProblem = async (req, res) => {
     const cached = await redisClient.get("allproblems");
 
     if (cached) {
-      return res.json(JSON.parse(cached));
+      return res.send(JSON.parse(cached));
     }
 
     const problems = await Problem.find({})
@@ -176,7 +176,7 @@ const getAllProblem = async (req, res) => {
       JSON.stringify(problems)
      );
 
-    return res.json(problems);
+    return res.send(problems);
 
   } catch (err) {
 
