@@ -22,6 +22,13 @@ app.use("/user",userauth);
 app.use('/problem',problemRouter)
 app.use('/submit',submitrouter);
 app.use('/video',videoRouter)
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    status: "ok",
+    timestamp: new Date().toISOString(),
+  });
+});
 
 const intializeconnect=async()=>{
      await Promise.all([main(),redisClient.connect()]);
