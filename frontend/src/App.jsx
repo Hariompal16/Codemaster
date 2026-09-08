@@ -14,7 +14,7 @@ import AdminUpload from "./components/AdminUpload";
 import DailyProblem from "./pages/DailyProblem";
 
 function App(){
-  const dispatch=useDispatch()
+  const dispatch=useDispatch();
   
  const {isAuthenticated,loading,user}=useSelector((state)=>state.auth);
   useEffect(()=>{
